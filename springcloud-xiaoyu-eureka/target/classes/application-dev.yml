@@ -1,0 +1,22 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: xiaoyu-eureka-server
+eureka:
+  instance:
+    #注册中心IP地址
+    hostname: 127.0.0.1
+  client:
+    service-url:
+      #服务注册地址
+      defaultZone: http://${eureka.instance.hostname}:8080/eureka/
+      #是否需要注册到注册中心
+    register-with-eureka: false
+    #是否需要检索服务信息
+    fetch-registry: false
+  server:
+    #本地环境禁用自我保护机制
+    enable-self-preservation: false
+    #超过2000ms未检测到心跳包就将服务剔除
+    eviction-interval-timer-in-ms: 2000

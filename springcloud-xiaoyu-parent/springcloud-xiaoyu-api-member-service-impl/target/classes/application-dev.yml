@@ -1,0 +1,27 @@
+server:
+  port: 9090
+spring:
+  redis:
+    password: 123456
+    host: localhost
+  application:
+    name: xiaoyu-eureka-client-member
+eureka:
+  client:
+    service-url:
+      ##当前会员服务注册到eureka服务地址
+      defaultZone: http://localhost:8080/eureka
+      ##需要将服务注册到注册中心
+    register-with-eureka: true
+    ##需要检索服务
+    fetch-registry: true
+  ##心跳检测与续约时间
+  ##测试时将值设置的小些，保证服务关闭后注册中心能及时剔除服务
+  instance:
+    ##Eureka客户端向服务端发送心跳的时间间隔,单位为秒
+    lease-renewal-interval-in-seconds: 5
+    ##Eureka服务端在收到最后一次心跳之后等待的时间上限，单位为秒。超过则剔除
+    lease-expiration-duration-in-seconds: 20
+ribbon:
+  ReadTimeout: 5000
+  ConnectTimeout: 5000

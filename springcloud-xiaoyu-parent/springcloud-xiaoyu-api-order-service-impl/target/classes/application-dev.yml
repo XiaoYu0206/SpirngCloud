@@ -1,0 +1,41 @@
+server:
+  port: 9091
+spring:
+  redis:
+    password: 123456
+    host: localhost
+  application:
+    name: xiaoyu-eureka-client-order
+eureka:
+  client:
+    service-url:
+      ##当前会员服务注册到eureka服务地址
+      defaultZone: http://localhost:8080/eureka
+      ##需要将服务注册到注册中心
+    register-with-eureka: true
+    ##需要检索服务
+    fetch-registry: true
+  ##心跳检测与续约时间
+  ##测试时将值设置的小些，保证服务关闭后注册中心能及时剔除服务
+  instance:
+    ##Eureka客户端向服务端发送心跳的时间间隔,单位为秒
+    lease-renewal-interval-in-seconds: 5
+    ##Eureka服务端在收到最后一次心跳之后等待的时间上限，单位为秒。超过则剔除
+    lease-expiration-duration-in-seconds: 20
+#Feign客户端集成的ribbon负载均衡，默认开启
+ribbon:
+  #指的是两端建立连接所用的时间上限
+  ReadTimeout: 5000
+  #指的是已经建立连接的情况下，等待服务器响应的时间上限
+  ConnectTimeout: 5000
+feign:
+  #开启Hystrix断路器
+  hystrix:
+    enabled: true
+#Hystrix禁止服务超时时间
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: false
